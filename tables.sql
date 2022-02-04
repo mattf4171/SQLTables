@@ -311,13 +311,18 @@ runscript from '~/Downloads/courses-small.sql';
 select * from classroom;
 
 -- 1. show the name and salary of all instructors
-select name, salary from instructor;
+select name, salary 
+from instructor;
 
 -- 2. show all columns for instructors in the 'Comp. Sci.' department
-select * from instructor where dept_name='Comp. Sci.';
+select * 
+from instructor 
+where dept_name='Comp. Sci.';
 
 -- 3. show name, salary, department for instructors with salaries less than $50,000.
-select name, salary, dept_name from instructor where (salary<50000);
+select name, salary, dept_name 
+from instructor 
+where (salary<50000);
 
 -- 4. show the student name, major department and total credits for 
 --    students with at least 90 credits
