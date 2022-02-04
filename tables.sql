@@ -1,4 +1,4 @@
--- homework 2.sql
+-- Abstract: Use operations to make adjustments with respect to each table
 drop table if exists prereq; 
 drop table if exists takes; 
 drop table if exists teaches; 
