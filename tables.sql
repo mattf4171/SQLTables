@@ -321,11 +321,15 @@ select name, salary, dept_name from instructor where (salary<50000);
 
 -- 4. show the student name, major department and total credits for 
 --    students with at least 90 credits
-select name, dept_name, tot_cred from student where (tot_cred<90);
+select name, dept_name, tot_cred 
+from student 
+where (tot_cred<90);
 
 -- 5. show the student ID and name for students who are majoring in  
 --    Electrical Engineering  (Elec. Eng.) or Comp. Sci.  and have at least 90 credits
-select id, name from student where (dept_name='Elec. Eng.' or dept_name='Comp. Sci.') and tot_cred>=90;
+select id, name 
+from student 
+where (dept_name='Elec. Eng.' or dept_name='Comp. Sci.') and tot_cred>=90;
 
 -- 6. insert a new Student with an ID 12399, name is Fred Brooks, student is majoring in Comp. Sci., total credits is 0.
 insert into student values ('12399', 'Fred Brooks', 'Comp. Sci.', '0');
