@@ -343,10 +343,11 @@ select dept_name, salary from instructor
 update INSTRUCTOR  set SALARY =(SALARY +3500.00) where DEPT_NAME =''Physics"
 
 -- 12.  show the  ID, name and salary for all instructors
-select 12;
+select id, name, salary from instructor;
 
 -- 13.  try to delete the course 'PHY-101'.  
-delete 13;
+select * from course;
+delete from course_id set 
 
 -- 14.  Why does the delete fail?
 -- 
