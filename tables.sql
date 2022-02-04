@@ -301,58 +301,46 @@ insert into grade_points values ('C', 2.0);
 insert into grade_points values ('C-', 1.7);
 insert into grade_points values ('F', 0.0);
 
-
-
-
-
-
+runscript from '~/Downloads/courses-ddl.sql';
 runscript from '~/Downloads/courses-small.sql';
 
 select * from classroom;
 
 -- 1. show the name and salary of all instructors
-select name, salary 
-from instructor;
+select name, salary from instructor;
 
 -- 2. show all columns for instructors in the 'Comp. Sci.' department
-select * 
-from instructor 
-where dept_name='Comp. Sci.';
+select * from instructor where dept_name='Comp. Sci.';
 
 -- 3. show name, salary, department for instructors with salaries less than $50,000.
-select name, salary, dept_name 
-from instructor 
-where (salary<50000);
+select name, salary, dept_name from instructor where (salary<50000);
 
 -- 4. show the student name, major department and total credits for 
 --    students with at least 90 credits
-select name, dept_name, tot_cred 
-from student 
-where (tot_cred<90);
+select name, dept_name, tot_cred from student where (tot_cred<90);
 
 -- 5. show the student ID and name for students who are majoring in  
 --    Electrical Engineering  (Elec. Eng.) or Comp. Sci.  and have at least 90 credits
-select id, name 
-from student 
-where (dept_name='Elec. Eng.' or dept_name='Comp. Sci.') and tot_cred>=90;
+select id, name from student where (dept_name='Elec. Eng.' or dept_name='Comp. Sci.') and tot_cred>=90;
 
 -- 6. insert a new Student with an ID 12399, name is Fred Brooks, student is majoring in Comp. Sci., total credits is 0.
 insert into student values ('12399', 'Fred Brooks', 'Comp. Sci.', '0');
 
 -- 7. increase the total credits by 8 for student with ID 19991
-update student set tot_cred = tot_cred+8 where id=19991;
+update student set tot_cred=tot_cred+8 where id=19991
 
 -- 8. change the tot_cred for student ID=12399 to 100.
-update student set tot_cred = 100 where id=12399;
+update student set tot_cred =100 where id=12399
 
 -- 9. show all columns for all students
 select * from student;
 
 -- 10.  Give all faculty a 4% increase in salary.
-update 
+update INSTRUCTOR  set salary = salary*1.04
 
 -- 11.  Give all faculty in the Physics department a $3,500 salary increase.
-update 11;
+select dept_name, salary from instructor
+update INSTRUCTOR  set SALARY =(SALARY +3500.00) where DEPT_NAME =''Physics"
 
 -- 12.  show the  ID, name and salary for all instructors
 select 12;
@@ -441,4 +429,4 @@ drop table if exists department;
 drop table if exists classroom; 
 drop table if exists time_slot; 
 drop table if exists time_slot_1;
-drop table if exists grade_points; 
+drop table if exists grade_points;
