@@ -331,16 +331,16 @@ select id, name from student where (dept_name='Elec. Eng.' or dept_name='Comp. S
 insert into student values ('12399', 'Fred Brooks', 'Comp. Sci.', '0');
 
 -- 7. increase the total credits by 8 for student with ID 19991
-update 7;
+update student set tot_cred = tot_cred+8 where id=19991;
 
 -- 8. change the tot_cred for student ID=12399 to 100.
-update 8;
+update student set tot_cred = 100 where id=12399;
 
 -- 9. show all columns for all students
 select * from student;
 
 -- 10.  Give all faculty a 4% increase in salary.
-update 10;
+update 
 
 -- 11.  Give all faculty in the Physics department a $3,500 salary increase.
 update 11;
