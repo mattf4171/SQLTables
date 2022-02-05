@@ -339,27 +339,28 @@ select * from student;
 update INSTRUCTOR  set salary = salary*1.04
 
 -- 11.  Give all faculty in the Physics department a $3,500 salary increase.
-select dept_name, salary from instructor
-update INSTRUCTOR  set SALARY =(SALARY +3500.00) where DEPT_NAME =''Physics"
+-- select dept_name, salary from instructor
+update INSTRUCTOR  set SALARY = case when dept_name="Physics" then (SALARY +3500) end
 
 -- 12.  show the  ID, name and salary for all instructors
 select id, name, salary from instructor;
 
 -- 13.  try to delete the course 'PHY-101'.  
 select * from course;
-delete from course_id set 
+delete from course where course_id ="PHY-101"; 
 
 -- 14.  Why does the delete fail?
--- 
+-- Because the column course_id is a foreign key?
 
 -- 15.  Delete the course 'CS-315'
-delete 15;
+delete from COURSE  where COURSE_ID ="CS-315";
 
 -- 16.  Show a list of all course_id.
 select course_id from course;
 
 -- 17.  Show all the student majors.  Do not show duplicates.
-select dept_name from student order by dept_name; 
+select distinct dept_name from student order by dept_name; 
+
 -- 18.  create a table "company" with columns id, name and ceo. 
 -- Make "id" the primary key.
 -- insert the following data 
@@ -367,6 +368,15 @@ select dept_name from student order by dept_name;
 --    ACF  Acme Finance  Mike Dempsey
 --    TCA  Tara Capital  Ava Newton
 --    ALB  Albritton     Lena Dollar
+create table company
+    ( ID          varchar(5),
+      name    varchar(20) not null,
+      ceo       varchar(20) not null,
+      primary key (ID)
+    );
+insert into company values('ACF', 'Abhi Engineering', 'Mike Dempsey');
+insert into company values('TCA', 'Tara Capital', 'Ava Newton');
+insert into company values('ALB', 'Albritton', 'Lena Dollar');
 
 
 -- create a table "security" with columns id, name, type.
@@ -378,7 +388,17 @@ select dept_name from student order by dept_name;
 --    CM    County Municipality Bond
 --    DU    Downtown Utlity     Bond
 --    EM    Emmitt Machines     Stock
-
+create table security 
+	( 	ID		varchar(5),
+		name	varchar(20),
+		type	varchar(20),
+		primary key (ID)
+	);
+insert into security values('AE', 'Abhi Engineering', 'Stock');
+insert into security values('BH', 'Blues Health', 'Stock');
+insert into security values('CM', 'County Municipality', 'Bond');
+insert into security values('DU', 'Downtown Utlity', 'Bond');
+insert into security values('EM', 'Emmitt Machines', 'Stock');
 
 -- create a table "funds"   
 -- Make "FundID" the primary key.  
@@ -391,6 +411,20 @@ select dept_name from student order by dept_name;
 --    TCA      2006-01-01     OF     Owl Fund
 --    ALB      2005-01-01     JU     Jupiter
 --    ALB      2006-01-01     SA     Saturn
+create table funds
+	(	CompanyID		varchar(5),
+		InceptionDate	varchar(20),
+		FundID			varchar(5),
+		Name			varchar(20),
+		primary key (FundID),
+		foreign key (CompanyID) references company(id)
+	);
+insert into funds values('ACF', '2005-01-01', 'BG', 'Big Growth');
+insert into funds values('ACF', '2006-01-01', 'SG', 'Steady Growth');
+insert into funds values('TCA', '2005-01-01', 'LF', 'Tiger Fund');
+insert into funds values('TCA', '2006-01-01', 'OF', 'Owl Fund');
+insert into funds values('ALB', '2005-01-01', 'JU', 'Jupiter');
+insert into funds values('ALB', '2006-01-01', 'SA', 'Saturn');
 
 
 -- create a table holdings
@@ -411,10 +445,28 @@ select dept_name from student order by dept_name;
 --     JU       DU          1000
 --     SA       EM          1000
 --     SA       DU          2000
-
+create table holdings
+	(	fundID		varchar(5),
+		securityID	varchar(5),
+		quantity	numeric(5),
+		primary key(fundID, securityID),
+		foreign key(fundID) references security(ID) on delete set null
+	);
+insert into holdings values('BG', 'AE', '500');
+insert into holdings values('BG', 'EM', '300');
+insert into holdings values('SG', 'AE', '300');
+insert into holdings values('SG', 'DU', '300');
+insert into holdings values('LF', 'EM', '1000');
+insert into holdings values('LF', 'BH', '1000');
+insert into holdings values('OF', 'CM', '1000');
+insert into holdings values('OF', 'DU', '1000');
+insert into holdings values('JU', 'EM', '2000');
+insert into holdings values('JU', 'DU', '1000');
+insert into holdings values('SA', 'EM', '1000');
+insert into holdings values('SA', 'DU', '2000');
 
 -- 19.  alter the security table to add a column price numeric(7,2)
-alter table 19;
+alter table security add price numeric(7,2);
 
 -- 20.  drop the tables. Because of the foreign keys, you must drop the 
 --   tables in a particular order.
@@ -431,3 +483,7 @@ drop table if exists classroom;
 drop table if exists time_slot; 
 drop table if exists time_slot_1;
 drop table if exists grade_points;
+drop table if exists company;
+drop table if exists security;
+drop table if exists holdings;
+drop table if exists funds;
